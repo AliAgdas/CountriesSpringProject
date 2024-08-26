@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Country Search</title>
+    <script>
+        async function searchCountry() {
+            const iso = document.getElementById('iso').value;
+            const response = await fetch(`/api/search?iso=${iso}`, {
+                method: 'POST'
+            });
+            const result = await response.text();
+            document.getElementById('result').innerText = result;
+        }
+    </script>
+</head>
+<body>
+<form onsubmit="event.preventDefault(); searchCountry();">
+    <label for="iso">ISO Code:</label>
+    <input type="text" id="iso" name="iso">
+    <button type="submit">Search</button>
+</form>
+<div>
+    <p id="result"></p>
+</div>
+</body>
+</html>
+
